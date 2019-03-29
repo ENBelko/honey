@@ -1,99 +1,91 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+@section('content')
+    <section class="py-5 honey-style">
+        <div class="container">
+            <div class="w-100">
+                <img src="{{asset('img/honey/mail_icon.png')}}" class="mx-auto d-block mail-icon" alt="">
+            </div>
+            <form name="send" method="post">
+                @csrf
+                <div class="d-flex">
+                    <div class="w-45 mr-auto">
+                        <div class="form-group">
+                            <label for="name">Имя <span class="star">*</span></label>
+                            <input type="text" name="name" class="form-control form-honey">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email <span class="star">*</span></label>
+                            <input type="email" name="email" class="form-control form-honey">
+                        </div>
+                    </div>
+                    <div class="w-45">
+                        <div class="form-group">
+                            <label for="comment">Комментарий <span class="star">*</span></label>
+                            <textarea name="comment" id="txt-area" cols="30" rows="10"
+                                      class="form-control form-honey"></textarea>
+                        </div>
+                    </div>
                 </div>
-            @endif
+                <input type="submit" class="btn btn-honey float-right" value="Записать">
+            </form>
+        </div>
+    </section>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+    <section class="py-5 honey-style-versa">
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+        <div class="container">
+            <div id="comment-block" class="d-flex flex-wrap">
+            @foreach($comments as $comment)
+                <div class="mx-auto card @if($comment->id % 2 != 0) card-honey-1 @else card-honey-2 @endif">
+                    <div class="card-header text-center">{{$comment->name}}</div>
+                    <div class="card-body text-center">
+                        <span><b>{{$comment->email}}</b></span><br>
+                        <span>{{$comment->comment}}</span>
+                    </div>
                 </div>
+                @endforeach
             </div>
         </div>
-    </body>
-</html>
+
+    </section>
+@endsection
+@section('scripts')
+    <script>
+        $(document).on('submit', 'form[name="send"]', (event) => {
+            //alert('я тут!');
+            event.preventDefault();
+            let data = new FormData(event.currentTarget);
+
+            $.ajax({
+                method: 'POST',
+                url: '{{route('comment.store')}}',
+                data: data,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+
+                    $('#comment-block').append('' +
+                        '<div class="mx-auto card card-honey-'+result.mod+'">\n' +
+                        '<div class="card-header text-center">'+result.name+'</div>\n' +
+                        '<div class="card-body text-center">\n' +
+                        '<span><b>'+result.email+'</b></span><br>\n' +
+                        '<span>'+result.comment+'</span>\n' +
+                        '</div>\n' +
+                        '</div>');
+
+                    showMsg(result.success);
+                },
+                error: (jqXHR, exception) => {
+                    let verrors = '';
+                    $.each(jqXHR.responseJSON.errors, function (key, value) {
+                        verrors += value;
+                    });
+                    showMsg(verrors, 'error');
+                }
+            })
+
+        })
+
+    </script>
+@endsection

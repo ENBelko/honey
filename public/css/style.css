@@ -1,0 +1,141 @@
+/*honey-style*/
+
+html,
+body {
+  height: 100%;
+}
+
+nav img {
+  height: auto;
+  width: 50%;
+}
+
+nav .nav-link {
+  color: #f6f6f7 !important;
+}
+
+main img.mail-icon {
+  height: auto;
+  width: 20%;
+}
+
+.navbar-toggler {
+  border-color: #f6f6f7 !important;
+}
+
+.container .container {
+  color: #2d3136;
+}
+
+footer {
+  background: #2a2d33;
+}
+
+footer img {
+  height: auto;
+  width: 20%;
+}
+
+footer .socials {
+  height: 10%;
+  width: 10%;
+}
+
+/*honey-style*/
+
+.honey-style,
+.form-honey {
+  background: #2d3136;
+  color: #f6f6f7 !important;
+}
+
+.honey-style-versa {
+  background: #f6f6f7;
+  color: #2d3136;
+}
+
+.btn-honey {
+  background: #be393b;
+  color: #f6f6f7;
+}
+
+.card-honey-1 {
+  width: 33%;
+}
+
+.card-honey-1 .card-header {
+  background: #2d3136;
+  color: white;
+}
+
+.card-honey-1 b {
+  color: #2d3136;
+}
+
+.card-honey-2 {
+  width: 33%;
+}
+
+.card-honey-2 .card-header {
+  background: #58ad52;
+  color: white;
+}
+
+.card-honey-2 b {
+  color: #58ad52;
+}
+
+.form-honey {
+  border: 1px solid #f6f6f7;
+}
+
+.form-honey:focus {
+  border: 1px solid #be393b;
+  outline: none !important;
+  background: #2d3136;
+}
+
+.form-honey:active {
+  outline: none !important;
+  background: #2d3136;
+}
+
+/*honey-style*/
+
+/*Correction*/
+
+.form-control:focus,
+.btn:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+}
+
+.form-control:active,
+.btn:active {
+  outline: none !important;
+  box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+}
+
+.star {
+  color: #be393b;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+#flashMsg {
+  bottom: 20px;
+  right: 10px;
+  position: fixed;
+  z-index: 9999;
+  padding: 10px;
+  text-align: center;
+  background: #2d3136;
+  color: #f6f6f7;
+}
+
+.hide {
+  display: none;
+}
+

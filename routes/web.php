@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', /*function () {
+    return view('welcome');}*/'CommentsController@show')->name('welcome');
+
+Route::post('/comments/create', 'CommentsController@store')->name('comment.store');
 
 Auth::routes();
 
