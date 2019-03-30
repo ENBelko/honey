@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
@@ -38,8 +40,11 @@
     <footer class="honey-style py-2">
         <div class="container">
 
-            <div><img src="{{asset('img/honey/logo.png')}}" alt=""></div>
-
+            <div class="float-left"><img src="{{asset('img/honey/logo.png')}}" alt=""></div>
+            <div class="float-right text-right">
+                <a href="https://vk.com/feed"><img src="{{asset('img/honey/vk.jpg')}}" class="socials mt-0" alt=""></a>
+                <a href="https://www.facebook.com"><img src="{{asset('img/honey/fb.jpg')}}" class="socials mt-0" alt=""></a>
+            </div><br style="clear: both">
         </div>
     </footer>
 

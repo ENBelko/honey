@@ -32,7 +32,8 @@ main {
 }
 
 footer {
-  background: #2a2d33;
+  height: 100px;
+  background: #2a2d33 !important;
 
   img {
     height: auto;
@@ -41,8 +42,8 @@ footer {
   }
 
   .socials {
-    height: 10%;
-    width: 10%;
+    height: auto !important;
+    width: 15% !important;
   }
 
 }
